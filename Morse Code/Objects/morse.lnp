@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\morse" 
+PRINT(".\Listings\morse.m51") RAMSIZE(256) 

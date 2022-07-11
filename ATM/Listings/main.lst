@@ -1,0 +1,109 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:13:02 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "endsem.h"
+   3          
+   4          char S_str[6]= {0,0,0,0,0,0};   //String for Balance Sita
+   5          char G_str[6] = {0,0,0,0,0,0};  //String for Balance Gita
+   6          char n500_s[3]= {0,0,0};    // STRING FOR 500RS NOTE
+   7          char n100_s[3]= {0,0,0};    // STRING FOR 100RS NOTE
+   8          
+   9          char password[5] = {0,0,0,0,0} ;   //PASSWORD ARRAY
+  10          //Main function
+  11          
+  12          //-------------------------------------------------
+  13          void money(void)
+  14          {
+  15   1        unsigned char money = receive_char();
+  16   1        int a = 100*money;
+  17   1        char b =0;
+  18   1        char c= 0;
+  19   1        int_to_string(a/500,&b);
+  20   1        int_to_string((a%500)/100,&c);
+  21   1        transmit_char(b);
+  22   1        transmit_string("\r\n");
+  23   1        transmit_char(c);
+  24   1      }
+  25          void account(void)
+  26          {
+  27   1        unsigned char number = receive_char();
+  28   1        switch(number)
+  29   1        {
+  30   2          case '1': transmit_string("Account Holder: Sita\r\n");
+  31   2                    transmit_string("Account Balance: 10000\r\n");
+  32   2                     break;
+  33   2          case '2': transmit_string("Account Holder: Gita\r\n");
+  34   2                    transmit_string("Account Balance: 10000\r\n");
+  35   2                     break;
+  36   2          default : transmit_string("No such account, please enter valid details\r\n");
+  37   2                    break;
+  38   2        }
+  39   1        return;
+  40   1      }
+  41          
+  42          void withdraw(void)
+  43          {
+  44   1        unsigned char number = receive_char();
+  45   1        switch(number)
+  46   1        {
+  47   2          case '1': transmit_string("Enter Amount in hundreds\r\n");
+  48   2                    money();
+  49   2         case '2': transmit_string("Enter Amount in hundreds\r\n");
+  50   2                    money();    
+  51   2         default: transmit_string("Invalid");
+  52   2           
+  53   2        }
+  54   1        
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:13:02 PAGE 2   
+
+  55   1      }
+  56          
+  57          
+  58          
+  59          
+  60          
+  61          void main(void)
+  62          {
+  63   1        uart_init();
+  64   1        //unsigned int s = 10000;
+  65   1        //unsigned int g = 10000;
+  66   1        transmit_string("Press A for Account display and W for withdrawing cash\r\n");            // Please finis
+             -h this function in endsem.h 
+  67   1          while (1)
+  68   1          {
+  69   2           unsigned char ch = receive_char();
+  70   2            switch(ch)
+  71   2            {
+  72   3              case 'A': transmit_string("Hello, Please enter Account number\r\n");
+  73   3                        account();
+  74   3                        break;
+  75   3              
+  76   3              case 'W': transmit_string("Withdraw state, enter account number\r\n");
+  77   3                        withdraw();
+  78   3            }
+  79   2          }
+  80   1      }
+  81          
+  82          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    579    ----
+   CONSTANT SIZE    =    288    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
